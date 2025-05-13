@@ -6,6 +6,7 @@ import (
     "strings"
     "sort"
     "os"
+    "strconv"
 )
 
 // Struct học sinh
@@ -38,9 +39,9 @@ func showMenu() {
     fmt.Println("1. Danh sách lớp sort theo name ASC")
     fmt.Println("2. Danh sách học sinh sort theo name DESC")
     fmt.Println("3. Danh sách lớp học sinh X đã tham gia(X là student_id nhập từ terminal)")
-    //case 4  Danh sách giáo viên với các filter như sau
-    fmt.Println("4. Kết thúc")
-    fmt.Print("Chọn (1-4): ")
+    fmt.Println("4. Danh sách giáo viên với các filter như sau:")
+    fmt.Println("5. Kết thúc")
+    fmt.Print("Chọn (1-5): ")
 }
 
 func listClasses() {
@@ -64,7 +65,7 @@ func listStudents() {
         return
     }
     Sort(students, func(a, b Student) bool {
-        return a.StudentName < b.StudentName
+        return a.StudentName > b.StudentName
     })
     fmt.Println("\n--- Danh sách học sinh ---")
     for i, s := range students {
@@ -79,11 +80,64 @@ func getClassOfStudent(studentID string, classes []Class) []Class {
         for _, st := range class.Students {
             if st.Student_id == studentID {
                 result = append(result, class)
-                break // tránh trùng lặp
+                break
             }
         }
     }
     return result
+}
+
+func getListTeacherWithFilter(scanner *bufio.Scanner) {
+    teachers := map[string][]Class{}
+    for _, class := range classes {
+        teachers[class.GVCN] = append(teachers[class.GVCN], class)
+    }
+    fmt.Println("Chọn filter:")
+    fmt.Println("1. Tất cả giáo viên")
+    fmt.Println("2. Giáo viên là GVCN")
+    fmt.Println("3. GVCN lớp có trên X học sinh")
+    fmt.Println("4. GVCN trên X lớp")
+    fmt.Print("Chọn filter: ")
+    scanner.Scan()
+    option := strings.TrimSpace(scanner.Text())
+
+    switch option {
+    case "1":
+        fmt.Println("Danh sách tất cả giáo viên:")
+        for teacher := range teachers {
+            fmt.Println("-", teacher)
+        }
+    case "2":
+        fmt.Println("Giáo viên là GVCN:")
+        for teacher := range teachers {
+            fmt.Println("-", teacher)
+        }
+    case "3":
+        fmt.Print("Nhập số học sinh: ")
+        scanner.Scan()
+        x, _ := strconv.Atoi(scanner.Text())
+        fmt.Printf("Giáo viên chủ nhiệm lớp có > %d học sinh:\n", x)
+        for teacher, classList := range teachers {
+            for _, c := range classList {
+                if len(c.Students) > x {
+                    fmt.Println("-", teacher)
+                    break
+                }
+            }
+        }
+    case "4":
+        fmt.Print("Nhập số lượng lớp: ")
+        scanner.Scan()
+        x, _ := strconv.Atoi(scanner.Text())
+        fmt.Printf("Giáo viên chủ nhiệm trên > %d lớp:\n", x)
+        for teacher, classList := range teachers {
+            if len(classList) > x {
+                fmt.Println("-", teacher)
+            }
+        }
+    default:
+        fmt.Println("Lựa chọn không hợp lệ.")
+    }
 }
 
 func main() {
@@ -103,7 +157,7 @@ func main() {
             },
         },
         {
-            Class_id: "3", ClassName: "Class_H", GVCN: "Nguyen Thi C",
+            Class_id: "3", ClassName: "Class_H", GVCN: "Nguyen Thi D",
             Students: []Student{
                 {Student_id: "1"},
                 {Student_id: "2"},
@@ -121,7 +175,7 @@ func main() {
             },
         },
         {
-            Class_id: "5", ClassName: "Class_O", GVCN: "Nguyen Thi E",
+            Class_id: "5", ClassName: "Class_O", GVCN: "Nguyen Thi B",
             Students: []Student{
                 {Student_id: "1"},
                 {Student_id: "7"},
@@ -161,6 +215,8 @@ func main() {
                 fmt.Printf("- %s (%s)\n", class.ClassName, class.GVCN)
             }
         case "4":
+           getListTeacherWithFilter(scanner)
+        case "5":
             fmt.Println("Kết thúc.")
             return
         default:
