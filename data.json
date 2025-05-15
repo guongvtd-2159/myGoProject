@@ -1,0 +1,44 @@
+{
+    "schools": [
+        {"id": "1", "name": "Trường A "}
+    ],
+    "teachers": [
+        {"id": "1", "name": "Nguyễn Thị A", "address": "Hồ Chí Minh"},
+        {"id": "2", "name": "Nguyễn Thị B", "address": "Hồ Chí Minh"},
+        {"id": "3", "name": "Nguyễn Thị G", "address": "Thủ Đức"},
+        {"id": "4", "name": "Nguyễn Thị J", "address": "Hồ Chí Minh"},
+        {"id": "5", "name": "Nguyễn Thị D", "address": "Thủ Đức"}
+    ],
+    "classes": [
+        {"id": "1", "name": "Class_F", "school_id": "1", "teacher_id": "1"},
+        {"id": "2", "name": "Class_H", "school_id": "1", "teacher_id": "3"},
+        {"id": "3", "name": "Class_O", "school_id": "1", "teacher_id": "4"},
+        {"id": "4", "name": "Class_B", "school_id": "1", "teacher_id": "2"},
+        {"id": "5", "name": "Class_C", "school_id": "1", "teacher_id": "4"},
+        {"id": "6", "name": "Class_G", "school_id": "1", "teacher_id": "2"}
+    ],
+    "students": [
+        {"id": "1", "name": "Trần Văn Học Sinh", "address": "Thủ Đức", "phone": "0351212312"},
+        {"id": "2", "name": "Trần Văn H", "address": "Hồ Chí Minh", "phone": "0351212313"},
+        {"id": "3", "name": "Trần Văn Học", "address": "Thủ Đức", "phone": "0351212314"},
+        {"id": "4", "name": "Trần Văn Sinh", "address": "Thủ Đức", "phone": "0351212315"},
+        {"id": "5", "name": "Trần Văn Sinh Học", "address": "Thủ Đức", "phone": "0351212316"},
+        {"id": "6", "name": "Trần Văn Sin", "address": "Hồ Chí Minh", "phone": "0351212317"},
+        {"id": "7", "name": "Trần Văn Ho", "address": "Bến Tre", "phone": "0351212318"}
+    ],
+    "student_classes": [
+        {"student_id": "1", "class_id": "1"},
+        {"student_id": "3", "class_id": "2"},
+        {"student_id": "3", "class_id": "1"},
+        {"student_id": "2", "class_id": "3"},
+        {"student_id": "2", "class_id": "2"},
+        {"student_id": "4", "class_id": "5"},
+        {"student_id": "4", "class_id": "2"},
+        {"student_id": "5", "class_id": "2"},
+        {"student_id": "4", "class_id": "3"},
+        {"student_id": "5", "class_id": "6"},
+        {"student_id": "6", "class_id": "6"},
+        {"student_id": "1", "class_id": "6"},
+        {"student_id": "5", "class_id": "3"}
+    ]
+  }
