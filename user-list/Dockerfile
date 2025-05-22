@@ -14,5 +14,5 @@ RUN go build -o main .
 
 EXPOSE 8080
 
-CMD ["/app/wait-for-mysql.sh", "db", "/app/main"]
+CMD ["/app/wait-for-mysql.sh", "db", "3306", "/app/main"]
 
